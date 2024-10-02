@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Clicker Game</title>
-    <link rel="stylesheet" href="https://upcadebuilds.blob.core.windows.net/clicker/style.css">
+    <title>Unity WebGL Build - Clicker</title>
 </head>
 <body>
-    <h1>Welcome to My Clicker Game!</h1>
-    <div id="game-container"></div>
-    
-    <!-- Załadowanie pliku JavaScript z Azure Blob Storage -->
-    <script src="https://upcadebuilds.blob.core.windows.net/clicker/main.js"></script>
+    <script>
+        var buildUrl = "https://upcadebuilds.blob.core.windows.net/clicker/Build/";
+        var unityLoaderUrl = buildUrl + "UnityLoader.js";
+        
+        var script = document.createElement('script');
+        script.src = unityLoaderUrl;
+        script.onload = () => {
+            UnityLoader.instantiate("unityContainer", buildUrl + "build.json", {onProgress: UnityProgress});
+        };
+        document.body.appendChild(script);
+    </script>
+
+    <div id="unityContainer" style="width: 960px; height: 600px;"></div>
 </body>
 </html>
